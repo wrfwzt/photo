@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漫展集邮视频教学</title>
+    <style>
+        .main{
+            width: 1200px;
+            height: 750px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .video{
+            width: 1200px;
+             
+            margin: 0 auto;
+        }
+        .btn{
+            width: 700px;
+            height: 40px;
+            border: 5px solid red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+        .i{
+            width: 100px;
+            height: 35px;
+            font-size: 20px;
+            font-family: 'Child Fun Sans Demo';
+        }
+        .e{
+            width: 300px;
+            height: 35px;
+            font-size: 20px;
+            font-family: 'Child Fun Sans Demo';
+        }
+        .return{
+            width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        a{
+            width: 200px;
+            height: 30px;
+            font-size: 25px;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="./res/jquery/jQuery3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#i1").click(function () {
+               $(".vo").trigger("play"); 
+            });
+            $("#i2").click(function () { 
+               $(".vo").trigger("pause"); 
+            });
+            $("#i3").click(function () {
+                var content =parseInt( $("#i5").val(),10);
+                $(".vo").prop( "currentTime",$(".vo").prop("currentTime")+content ); 
+                $("#i5").val("");
+            });
+            $("#i4").click(function () {
+                var muted = $(".vo").prop("muted");
+                $(".vo").prop("muted",!muted);
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="video"><video src="res/集邮.mp4" class="vo"  style="height: 700px;"></video></div>
+        <div class="btn">
+        <input type="button" value="播放"  id="i1" class="i"/>
+        <input type="button" value="暂停"  id="i2" class="i"/>
+        <input type="button" value="快进" id="i3" class="e"/>
+        <input type="text" class="i" id="i5">秒
+        <input type="button" value="静音" id="i4" class="i"/>
+        </div>
+        <div class="return"><a href="index.html">返回</a></div>
+    </div>
+</body>
+</html>

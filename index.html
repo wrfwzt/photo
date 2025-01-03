@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>写真拍摄集邮</title>
+    <style>
+        .mainwindow{
+            width: 1200px;
+            height: 750px;
+            margin:0 auto;
+        }
+        .proc{
+            position: relative;
+            width: 100%;
+            margin:0 auto;
+            overflow: hidden;
+            height: 32px;
+            background-color: rgb(1, 1, 1);
+            line-height: 32px;
+        }
+        .procedures{
+            display: block;
+            width: 100%;
+            position: absolute;
+            font-size: 32px;
+            color:rgb(10, 190, 34);
+            left: 0px;
+            height: 32px;
+            font-family: 'Child Fun Sans Demo';
+        }
+        #container{
+            width:1200px;
+            position: relative;
+            height: 750px;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 5px double rgba(159, 166, 19, 0.6);
+        }
+        #list{
+            position: absolute;
+            z-index: 1;
+            width: 2400px;
+            height: 750px;
+            display: flex;
+            
+            
+
+        }
+        .image{
+            width: 1200px;
+            transition: all 0.5s linear;
+        }
+        .arrow {
+            display:block;
+            position: absolute;
+            top: 105px;
+            z-index: 2;
+            display: none;
+            width: 20px;
+            height: 40px;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 37px;
+            text-align: center;
+            color:white;
+            cursor: pointer;
+        }
+        #container:hover .arrow {
+            display: block;
+        }
+        .vo{
+            width: 100%;
+            height: 40px;
+            margin: 0 auto;
+            font-family:'Child Fun Sans Demo' ;
+            font-size: 30px;
+            text-align: center;
+        }
+        .video{
+            background-color:antiquewhite;
+            font-family:'Child Fun Sans Demo' ;
+            font-size: 30px;
+            border: 3px solid blue;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 200px;
+            height: 50px;
+        }
+        .video :hover{
+            background-color:darkgray;
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="mainwindow">
+        <div class="proc">
+            <div class="procedures" id="procedure">将鼠标放在图片上可以放大图片并展示对人物的介绍；单击该图片进行集邮操作；页面低部还有视频教学</div>
+        </div>
+        <div id="container">
+            <div id="list" style="left:0px;" >
+                <a href="ex4-1.html"><img src="./res/害羞7/hx1.jpg"  onmouseover="bigger1(this)" onmouseout="smaller1(this)" id="picture1" class="image" onclick=""/></a>
+                <a href="ex4-2.html"><img src="./res/汤面桢子/tm1.jpg"   onmouseover="bigger1(this)" onmouseout="smaller1(this)" id="picture2" class="image" onclick=""/></a>
+            </div>
+            <span id="prev" class="arrow" onclick="last()" style="left: 73.3px;">《</span>
+            <span id="next" class="arrow" onclick="next()" style="right: 73.3px;">》</span>
+        </div>
+        <div class="vo"><a href="ex4-3.html"  class="video">视频教学</a></div>
+    </div>
+    <script src="./res/jquery/jQuery3.7.1.js"></script>
+    <script type="text/javascript">
+        var left=1200;
+        // window.onload = Explain();
+        window.onload = notice();
+//使用alert
+        function Explain(){
+            alert('集邮:漫展里一般是合影的意思，如果遇到喜欢的动漫角色或者人，都可以求“集邮”，及请求允许合影哦！ “远程集邮”则是无法当面合影，由其中一人把自己的照片发送到另一个人的手机，使用照片和自己合影的意思。');
+        }
+//使用帧频动画
+        function notice(){
+            document.getElementById("procedure").style.left = left+"px";
+            left -= 1;
+            if(left <= -950){
+              left = 1200;
+            }
+           window.requestAnimationFrame(notice);
+        }
+//图片轮播效果
+        var list = document.getElementById('list');
+            var lef = 0;
+            //上一个
+            function last() {  
+                lef-=1200;
+                list.style.left = lef+"px";
+                if(lef<-1200){
+                    lef=0;
+                   list.style.left = lef+"px"; 
+                   
+                }
+                
+            }
+            //下一个
+            function next() {  
+                lef-=1200;
+                list.style.left = lef+"px";
+                if(lef<-1200){
+                    lef=0;
+                   list.style.left = lef+"px"; 
+                   
+                }
+            }
+//图片放大效果
+        function bigger1(e){
+            e.style.width = "1500px";
+            e.style.height = "900px";
+            var b = document.getElementById("list");
+            
+            if(lef == 0){
+                var intr1 = document.createElement("p");
+                b.appendChild(intr1);
+                intr1.id = "intro1";
+                intr1.innerHTML = "coser害羞7是一位在二次元文化及cosplay领域中具有广泛影响力和知名度的知名coser。他以精美的cosplay作品和可爱的萌颜风格赢得了大量粉丝的喜爱和关注，成为二次元文化圈中的佼佼者。";
+                intr1.style = "cursor: pointer;font-family:山字瓜子体;left:100px;position:absolute;z-index:3;display:block;transition:all 1s ease;width:1000px;bottom:100px;margin:0 auto;border:3px solid green;line-height:32px;font-size:20px ;"
+            }else if(lef == -1200){
+                var intr2 = document.createElement("p");
+                intr2.id = "intro2";
+                b.appendChild(intr2);
+                intr2.innerHTML = "汤面桢子是一位知名的coser，因在漫展中摆出嫌弃脸而受到众多网友的关注。 她的嫌弃脸表情带有眉头紧锁、嘴角下拉、眼神冷漠等特征，这种表情通常出现在动漫女性角色身上，本意是传达不屑的感情，但却意外地受到了宅男们的喜爱。";
+                intr2.style = "cursor: pointer;font-family:山字瓜子体;left:1300px;position:absolute;z-index:4;display:block;transition:all 1s ease;width:1000px;bottom:100px;margin:0 auto;border:3px solid green;line-height:32px;font-size:20px ;"
+            }
+            
+
+
+        }
+        function smaller1(e){
+            e.style.width = "1200px";
+            e.style.height = "750px";
+            var b = document.getElementById("list");
+            if(lef == 0){
+                var c = document.getElementById("intro1");
+            }else if(lef == -1200){
+                var c = document.getElementById("intro2");
+            }
+            
+            b.removeChild(c);
+        }
+        $(document).ready(function(){
+          $(".video").click(function () {
+            
+          });
+      });
+    </script>
+</body>
+</html>
